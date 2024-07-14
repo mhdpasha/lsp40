@@ -13,24 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       User::create([
-        'username' => 'pasha',
-        'password' => 'pasha123',
-        'nama' => 'Muhamad Pasha Albara',
-        'umur' => '18',
-        'jurusan' => 'Rekayasa Perangkat Lunak',
-        'tanggallahir' => '2002-11-14',
-        'role' => 'asesor'
-       ]);
+        $data = [
+            'umur' => '18',
+            'jurusan' => 'Rekayasa Perangkat Lunak',
+            'tanggallahir' => '2001-5-17',
+        ];
 
        User::create([
         'username' => 'nicky',
         'password' => 'nicky123',
         'nama' => 'Nickymicko Ayub Hema Sasmitarja',
-        'umur' => '18',
-        'jurusan' => 'Rekayasa Perangkat Lunak',
-        'tanggallahir' => '2001-5-17',
-        'role' => 'asesor'
+        'profil' => json_encode($data),
+        'role' => 'Admin'
        ]);
     }
 }

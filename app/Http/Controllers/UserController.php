@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -16,13 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $role = request()->is('asesor')
-                ? 'asesor'
-                : 'asesi';
-
-        return view("pages.$role.index", [
-            'users' => User::where('role', $role)->get()
-        ]);
+        //
     }
 
     /**
@@ -36,56 +29,74 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-
     public function store(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:csv,txt',
-        ]);
-
         if ($request->hasFile('file')) {
-
             $file = $request->file('file');
-
             $path = $file->getRealPath();
             $data = array_map('str_getcsv', file($path));
             $header = array_shift($data);
 
             foreach ($data as $row) {
-               
                 $nama = $row[0];
                 $umur = $row[1];
                 $jurusan = $row[2];
-                $tanggallahir = Carbon::createFromFormat('d-m-Y', $row[3])->format('Y-m-d');
-
+                $tanggallahir = Carbon::createFromFormat('Y-m-d', $row[3])->format('d-m-Y');
                 $username = $this->generateUniqueUsername($nama);
-                $password = Str::random(8); // need trait soon
+                $password = Str::random(8);
+                $profil = [
+                    'Umur' => $umur,
+                    'Jurusan' => $jurusan,
+                    'Tanggal Lahir' => $tanggallahir,
+                ];
 
                 User::create([
-                    'nama' => $nama,
-                    'umur' => $umur,
-                    'jurusan' => $jurusan,
-                    'tanggallahir' => $tanggallahir,
-                    'username' => $username,
+                    'name' => $nama,
                     'password' => Hash::make($password),
-                    'role' => 'asesi'
+                    'profil' => json_encode($profil),
+                    'role' => 'Asesi',
+                    'username' => $username,
                 ]);
-
             }
-
             return redirect()->back()->with('success', 'CSV data imported');
-        } 
+        }
 
-        return redirect()->back();
+        $validated = $request->validate([
+            'username' => 'required|unique:users',
+            'nama' => 'required',
+            'password' => 'required'
+        ]);
+
+        $profile = $request->validate([
+            'no_registrasi' => 'required',
+            'sekolah' => 'required',
+            'kompetensi' => 'required',
+            'active' => 'required'
+        ]);
+
+        $profile['active'] = Carbon::createFromFormat('Y-m-d', $profile['active'])->format('d-m-Y');
+
+        User::create([
+            'nama' => $validated['nama'],
+            'password' => Hash::make($validated['password']),
+            'profil' => json_encode($profile),
+            'role' => 'Asesor',
+            'username' => $validated['username'],
+        ]);
+
+        return redirect(route('asessor.index'))->with('success', 'Data added!');
     }
 
     private function generateUniqueUsername($nama)
     {
+        // Generate a base username from the user's name
         $baseUsername = Str::slug($nama);
 
+        // Check if the username already exists
         $username = $baseUsername;
         $counter = 1;
         while (User::where('username', $username)->exists()) {
+            // Append a number to the base username to make it unique
             $username = $baseUsername . $counter;
             $counter++;
         }
@@ -106,7 +117,15 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        if($user->role == 'Asesor') {
+            return view('admin.assesor.edit', [
+                'user' => $user
+            ]);
+        }
+
+        return view('admin.asesi.edit', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -114,7 +133,28 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required',
+        ]);
+
+        if($request->get('password')){
+            $validated['password'] = Hash::make($request->get('password'));
+        }
+
+        if ($user->role == 'Asesor') {
+            $profile = $request->validate([
+                'no_registrasi' => 'required',
+                'sekolah' => 'required',
+                'kompetensi' => 'required',
+                'active' => 'required'
+            ]);
+        }
+        $profile['active'] = Carbon::createFromFormat('Y-m-d', $profile['active'])->format('d-m-Y');
+        $validated['profil'] = json_encode($profile);
+
+        $user->update($validated);
+
+        return redirect(route('asessor.index'))->with('success', 'Data edited!');
     }
 
     /**
@@ -122,6 +162,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->back()->with('success', 'Data deleted!');
     }
+
 }

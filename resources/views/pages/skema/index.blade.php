@@ -7,9 +7,9 @@
              <div class="card-header d-flex justify-content-between">
                 <div class="header-title d-flex justify-content-between w-100">
 
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                     + Tambah Data Asesi
-                  </button>
+                  <a href="{{ route('schema.create') }}" class="btn btn-primary">
+                     + Tambah Data Skema
+                  </a>
 
                   <button type="button" class="btn btn-outline-primary me-4">
                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
@@ -25,23 +25,27 @@
                    <table id="datatable" class="table table-striped" data-toggle="data-table">
                       <thead>
                          <tr>
-                           <th>No</th>
-                           <th>Nama</th>
-                           <th>Umur</th>
-                           <th>Jurusan</th>
-                           <th>Tanggal Lahir</th>
-                           <th>Username</th>
+                            <th>No.</th>
+                            <th>Skema Sertifikasi</th>
+                            <th>Jumlah Unit</th>
+                            <th>Jenis</th>
+                            <th>Aksi</th>
                          </tr>
                       </thead>
                       <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($schemes as $row)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->nama }}</td>
-                            <td>{{ $user->umur }}</td>
-                            <td>{{ $user->jurusan }}</td>
-                            <td>{{ $user->tanggallahir }}</td>
-                            <td>{{ $user->username }}</td>
+                            <td><a href="{{ route('schema.show', $row->id) }}">{{ $row->judul_unit }}</a></td>
+                            <td>{{ count(json_decode($row->elemen_kompetensi, true)) }}</td>
+                            <td>Klaster</td>
+                            <td>
+                                <form action="{{ route('schema.destroy', $row->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure about that?')">Hapus</button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                       </tbody>
@@ -54,22 +58,4 @@
     </div>
 </div>
 
-<script src="../assets/js/dropzone.js"></script>
-
- <!-- Modal -->
- <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h1 class="modal-title fs-5" id="addModalLabel">Drag CSV Below</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-         </div>
-         <form class="dropzone rounded mx-3 mb-3 mt-4 py-5" action="{{ route('asession.store') }}" method="POST" enctype="multipart/form-data" id="addForm">
-            @csrf
-         </form>
-      <button type="button" class="btn btn-primary mx-5 my-3" id="submitBtn">Save</button>
-
-     </div>
-   </div>
- </div>
 @endsection

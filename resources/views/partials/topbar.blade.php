@@ -3,7 +3,7 @@
     <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
       <div class="container-fluid navbar-inner">
         <a href="../dashboard/index.html" class="navbar-brand">
-            
+
             <!--Logo start-->
             <div class="logo-main">
                 <div class="logo-normal">
@@ -24,10 +24,10 @@
                 </div>
             </div>
             <!--logo End-->
-            
-            
-            
-            
+
+
+
+
             <h4 class="logo-title">Hope UI</h4>
         </a>
         <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
@@ -55,7 +55,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
-            
+
             <li class="nav-item me-2">
               <div data-setting="color-mode" data-name="color" data-value="dark" id="toggle" style="cursor: pointer">
                 <svg id="svg" class="icon-24" width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
@@ -218,7 +218,7 @@
                 <img src="../assets/images/avatars/avtar_3.png" alt="User-Profile" class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
                 <div class="caption ms-3 d-none d-md-block ">
                     <h6 class="mb-0 caption-title">{{ auth()->user()->nama }}</h6>
-                    <p class="mb-0 caption-sub-title">{{ auth()->user()->jurusan }}</p>
+                    <p class="mb-0 caption-sub-title">{{ strtoupper(auth()->user()->role) }}</p>
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
