@@ -26,5 +26,13 @@ class DatabaseSeeder extends Seeder
         'profil' => json_encode($data),
         'role' => 'Admin'
        ]);
+
+       User::create([
+        'username' => 'pasha',
+        'password' => 'pasha123',
+        'nama' => 'Muhamad Pasha Albara',
+        'profil' => json_encode($data),
+        'role' => 'Admin'
+       ]);
     }
 }
