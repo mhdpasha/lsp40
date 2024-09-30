@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('asessions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('schedule_id');
+            $table->integer('nilai');
+            $table->boolean('kompeten');
+            $table->string('keterangan');
+            $table->string('feedback_asesi');
             $table->foreignId('participant_id');
             $table->timestamps();
         });
