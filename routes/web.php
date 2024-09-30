@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReactController;
 use App\Http\Controllers\SchemaController;
 use App\Http\Controllers\AsessorController;
 use App\Http\Controllers\AsessionController;
@@ -18,6 +19,8 @@ use App\Http\Controllers\ScheduleController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::resource('/react', ReactController::class);
 
 Route::get('/', function () {
 
