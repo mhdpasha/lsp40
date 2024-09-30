@@ -37,7 +37,7 @@ class AsessionController extends Controller
      */
     public function store(StoreAsessionRequest $request)
     {
-
+        
     }
 
     /**
