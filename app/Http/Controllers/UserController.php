@@ -71,7 +71,11 @@ class UserController extends Controller
             'no_registrasi' => 'required',
             'sekolah' => 'required',
             'kompetensi' => 'required',
-            'active' => 'required'
+            'norek' => 'required',
+            'no_hp' => 'required',
+            'NPWP' => 'required',
+            'alamat' => 'required',
+            'active' => 'required',
         ]);
 
         $profile['active'] = Carbon::createFromFormat('Y-m-d', $profile['active'])->format('d-m-Y');
@@ -118,12 +122,12 @@ class UserController extends Controller
     public function edit(User $user)
     {
         if($user->role == 'Asesor') {
-            return view('admin.assesor.edit', [
+            return view('pages.asesor.edit', [
                 'user' => $user
             ]);
         }
 
-        return view('admin.asesi.edit', [
+        return view('pages.asesi.edit', [
             'user' => $user
         ]);
     }
@@ -143,11 +147,15 @@ class UserController extends Controller
 
         if ($user->role == 'Asesor') {
             $profile = $request->validate([
-                'no_registrasi' => 'required',
-                'sekolah' => 'required',
-                'kompetensi' => 'required',
-                'active' => 'required'
-            ]);
+            'no_registrasi' => 'required',
+            'sekolah' => 'required',
+            'kompetensi' => 'required',
+            'norek' => 'required',
+            'no_hp' => 'required',
+            'NPWP' => 'required',
+            'alamat' => 'required',
+            'active' => 'required',
+        ]);
         }
         $profile['active'] = Carbon::createFromFormat('Y-m-d', $profile['active'])->format('d-m-Y');
         $validated['profil'] = json_encode($profile);

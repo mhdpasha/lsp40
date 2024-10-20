@@ -6,28 +6,28 @@
       <title>LSP 40</title>
 
       <!-- Favicon -->
-      <link rel="shortcut icon" href="../assets/images/favicon.ico">
+      <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 
       <!-- Library / Plugin Css Build -->
-      <link rel="stylesheet" href="../assets/css/core/libs.min.css">
+      <link rel="stylesheet" href="{{asset('assets/css/core/libs.min.css')}}">
 
       <!-- Aos Animation Css -->
-      <link rel="stylesheet" href="../assets/vendor/aos/dist/aos.css">
+      <link rel="stylesheet" href="{{asset('assets/vendor/aos/dist/aos.css')}}">
 
       <!-- Hope Ui Design System Css -->
-      <link rel="stylesheet" href="../assets/css/hope-ui.min.css?v=4.0.0">
+      <link rel="stylesheet" href="{{asset('assets/css/hope-ui.min.css?v=4.0.0')}}">
 
       <!-- Custom Css -->
-      <link rel="stylesheet" href="../assets/css/custom.min.css?v=4.0.0">
+      <link rel="stylesheet" href="{{asset('assets/css/custom.min.css?v=4.0.0')}}">
 
       <!-- Dark Css -->
-      <link rel="stylesheet" href="../assets/css/dark.min.css">
+      <link rel="stylesheet" href="{{asset('assets/css/dark.min.css')}}">
 
       <!-- Customizer Css -->
-      <link rel="stylesheet" href="../assets/css/customizer.min.css">
+      <link rel="stylesheet" href="{{asset('assets/css/customizer.min.css')}}">
 
       <!-- RTL Css -->
-      <link rel="stylesheet" href="../assets/css/rtl.min.css">
+      <link rel="stylesheet" href="{{asset('assets/css/rtl.min.css')}}">
 
 
   </head>
@@ -64,18 +64,19 @@
 
     {{-- @include('partials.setting') --}}
 
+    
     <!-- Library Bundle Script -->
-    <script src="../assets/js/core/libs.min.js"></script>
+    <script src="{{asset('assets/js/core/libs.min.js')}}"></script>
 
     <!-- External Library Bundle Script -->
-    <script src="../assets/js/core/external.min.js"></script>
+    <script src="{{asset('assets/js/core/external.min.js')}}"></script>
 
     <!-- Widgetchart Script -->
-    <script src="../assets/js/charts/widgetcharts.js"></script>
+    <script src="{{asset('assets/js/charts/widgetcharts.js')}}"></script>
 
     <!-- mapchart Script -->
-    <script src="../assets/js/charts/vectore-chart.js"></script>
-    <script src="../assets/js/charts/dashboard.js" ></script>
+    <script src="{{asset('assets/js/charts/vectore-chart.js')}}"></script>
+    <script src="{{asset('assets/js/charts/dashboard.js')}}" ></script>
 
     <!-- fslightbox Script -->
     <script src="../assets/js/plugins/fslightbox.js"></script>
@@ -84,23 +85,22 @@
     <script src="../assets/js/plugins/setting.js"></script>
 
     <!-- Slider-tab Script -->
-    <script src="../assets/js/plugins/slider-tabs.js"></script>
+    <script src="{{asset('assets/js/plugins/slider-tabs.js')}}"></script>
 
     <!-- Form Wizard Script -->
-    <script src="../assets/js/plugins/form-wizard.js"></script>
+    <script src="{{asset('assets/js/plugins/form-wizard.js')}}"></script>
 
     <!-- AOS Animation Plugin-->
-    <script src="../assets/vendor/aos/dist/aos.js"></script>
+    <script src="{{asset('assets/vendor/aos/dist/aos.js')}}"></script>
 
     <!-- App Script -->
-    <script src="../assets/js/hope-ui.js" defer></script>
+    <script src="{{asset('assets/js/hope-ui.js')}}" defer></script>
 
     {{-- Dropzone --}}
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
     {{-- Color Scheme --}}
-    <script src="../assets/js/theme.js"></script>
-
+    <script src="{{asset('assets/js/theme.js')}}"></script>
   </body>
 </html>

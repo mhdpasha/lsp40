@@ -45,6 +45,12 @@
                                      </div>
                                   </div>
                                   <div class="col-md-6 mb-3">
+                                    <label for="validationCustomUsername" class="form-label">Email</label>
+                                    <div class="form-group">
+                                       <input type="email" value="{{ old('email') }}" name="email" class="form-control bg-white @error('email') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                                    </div>
+                                 </div>
+                                  <div class="col-md-6 mb-3">
                                       <label for="validationCustomUsername" class="form-label">No Registrasi</label>
                                       <div class="form-group">
                                          <input type="text" value="{{ old('no_registrasi') }}" name="no_registrasi" class="form-control bg-white @error('no_registrasi') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
@@ -63,6 +69,30 @@
                                       </div>
                                    </div>
                                    <div class="col-md-6 mb-3">
+                                    <label for="validationCustomUsername" class="form-label">Alamat</label>
+                                    <div class="form-group">
+                                       <input type="text" value="{{ old('alamat') }}" name="alamat" class="form-control bg-white @error('alamat') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6 mb-3">
+                                    <label for="validationCustomUsername" class="form-label">NPWP</label>
+                                    <div class="form-group">
+                                       <input type="text" value="{{ old('NPWP') }}" name="NPWP" class="form-control bg-white @error('NPWP') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6 mb-3">
+                                    <label for="validationCustomUsername" class="form-label">No. Rekening</label>
+                                    <div class="form-group">
+                                       <input type="text" value="{{ old('norek') }}" name="norek" class="form-control bg-white @error('norek') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6 mb-3">
+                                    <label for="validationCustomUsername" class="form-label">No. Hp</label>
+                                    <div class="form-group">
+                                       <input type="text" value="{{ old('no_hp') }}" name="no_hp" class="form-control bg-white @error('no_hp') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                                    </div>
+                                 </div>
+                                   <div class="col-md-6 mb-3">
                                       <label for="validationCustomUsername" class="form-label">Masa Berlaku s/d</label>
                                       <div class="form-group">
                                          <input type="date" value="{{ old('active') }}" name="active" class="form-control bg-white @error('active') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
@@ -77,8 +107,6 @@
                      </div>
                    </div>
 
-
-
                 </div>
              </div>
              <div class="card-body">
@@ -92,7 +120,6 @@
                             <th>No Registrasi</th>
                             <th>Asal Sekolah</th>
                             <th>Kompetensi</th>
-                            <th>Masa Berlaku</th>
                             <th>Aksi</th>
                          </tr>
                       </thead>
@@ -101,9 +128,9 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $row->nama }}</td>
-                            @foreach (json_decode($row->profil) as $item)
-                                <td>{{ $item }}</td>
-                            @endforeach
+                            <td>{{ json_decode($row->profil)->no_registrasi }}</td>
+                            <td>{{ json_decode($row->profil)->sekolah }}</td>
+                            <td>{{ json_decode($row->profil)->kompetensi }}</td>
                             <td>
                                 <form action="{{ route('users.destroy', $row->id) }}" method="post">
                                     @csrf
@@ -111,6 +138,7 @@
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure about that?')">DEL</button>
                                 </form>
                                 <a class="btn btn-warning" href="{{ route('users.edit', $row->id) }}">EDIT</a>
+                                <a class="btn btn-info" href="{{ route('asessor.show', $row->id) }}">DETAIL</a>
                             </td>
                         </tr>
                         @endforeach

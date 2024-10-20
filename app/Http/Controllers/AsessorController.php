@@ -41,7 +41,10 @@ class AsessorController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $user = User::where('id', last(request()->segments()))->first();
+        return view('pages.asesor.detail',[
+            'user' => $user
+        ]);
     }
 
     /**

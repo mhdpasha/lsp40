@@ -24,70 +24,73 @@
                 <form class="rounded mx-3 mb-3" action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data" id="addAsesor">
                     @csrf
                     <div class="row" id="rowForm">
-                      <div class="col-md-12 mb-3">
-                         <label class="form-label" for="validationDefault01">Judul</label>
-                         <input type="text" name="judul" class="form-control bg-white @error('judul') is-invalid @enderror" id="validationDefault01" required>
-                         @error('judul')
-                            <div class="invalid-feedback">
-                               {{ $message }}
-                            </div>
-                         @enderror
-                      </div>
-                      <div class="col-md-12 mb-3">
-                        <label class="form-label" for="validationDefault01">TUK</label>
-                        <input type="text" name="TUK" class="form-control bg-white @error('TUK') is-invalid @enderror" id="validationDefault01" required>
-                        @error('TUK')
-                           <div class="invalid-feedback">
-                              {{ $message }}
-                           </div>
-                        @enderror
+                     <div class="col-md-6 mb-3">
+                        <label class="form-label" for="validationDefault01">Nama</label>
+                        <input type="text" name="nama" value="{{ $user->nama }}" class="form-control bg-white @error('nama') is-invalid @enderror" id="validationDefault01" required>
                      </div>
-                      <div class="col-md-6 mb-3">
-                        <label class="form-label" for="validationDefault01">Asesor</label>
-                        <select name="asessor_id" id="" class="form-control bg-white @error('asessor_id') is-invalid @enderror">
-                            <option selected disabled>Pilih</option>
-                            @foreach ($asesor as $row)
-                                <option value="{{ $row->id }}" {{ $row->id == old('asessor_id') ? 'selected' : '' }}>{{ $row->nama }} ({{ json_decode($row->profil)->no_registrasi}})</option>
-                            @endforeach
-                        </select>
-                        @error('asessor_id')
-                           <div class="invalid-feedback">
-                              {{ $message }}
-                           </div>
-                        @enderror
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <label class="form-label" for="validationDefault01">Skema Sertifikasi</label>
-                        <select name="schema_id" id="" class="form-control bg-white @error('schema_id') is-invalid @enderror">
-                            <option selected disabled>Pilih</option>
-                            @foreach ($schemes as $row)
-                                <option value="{{ $row->id }}" {{ $row->id == old('schema_id') ? 'selected' : '' }}>{{ $row->judul_unit }}</option>
-                            @endforeach
-                        </select>
-                        @error('schema_id')
-                           <div class="invalid-feedback">
-                              {{ $message }}
-                           </div>
-                        @enderror
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <label class="form-label" for="validationDefault01">Tanggal Mulai</label>
-                        <input type="date" name="timeline_start" class="form-control bg-white @error('timeline_start') is-invalid @enderror" id="validationDefault01" value="{{ old('timeline_start') }}" required>
-                        @error('timeline_start')
-                           <div class="invalid-feedback">
-                              {{ $message }}
-                           </div>
-                        @enderror
+                     @error('nama')
+                        <div class="invalid-feedback">
+                           {{ $message }}
+                        </div>
+                     @enderror
+                     <div class="col-md-6 mb-3">
+                        <label class="form-label" for="validationDefault02">Username</label>
+                        <input type="text" value="{{ $user->username }}" name="username" class="form-control bg-white @error('username') is-invalid @enderror" id="validationDefault02" required>
                      </div>
                      <div class="col-md-6 mb-3">
-                        <label class="form-label" for="validationDefault01">Tanggal Berakhir</label>
-                        <input type="date" name="timeline_end" class="form-control bg-white @error('timeline_end') is-invalid @enderror" id="validationDefault01" value="{{ old('timeline_end') }}" required>
-                        @error('timeline_end')
-                           <div class="invalid-feedback">
-                              {{ $message }}
-                           </div>
-                        @enderror
+                        <label for="validationCustomUsername" class="form-label">Password</label>
+                        <div class="form-group">
+                           <input type="text" name="password" class="form-control bg-white @error('password') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
                      </div>
+                     <div class="col-md-6 mb-3">
+                         <label for="validationCustomUsername" class="form-label">No Registrasi</label>
+                         <div class="form-group">
+                            <input type="text" value="{{ json_decode($user->profil)->no_registrasi }}" name="no_registrasi" class="form-control bg-white @error('no_registrasi') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                         </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                         <label for="validationCustomUsername" class="form-label">Asal Sekolah</label>
+                         <div class="form-group">
+                            <input type="text" value="{{ json_decode($user->profil)->sekolah }}" name="sekolah" class="form-control bg-white @error('sekolah') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                         </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                         <label for="validationCustomUsername" class="form-label">Kompetensi</label>
+                         <div class="form-group">
+                            <input type="text" value="{{ json_decode($user->profil)->kompetensi }}" name="kompetensi" class="form-control bg-white @error('kompetensi') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                         </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                       <label for="validationCustomUsername" class="form-label">Alamat</label>
+                       <div class="form-group">
+                          <input type="text" value="{{ json_decode($user->profil)->alamat }}" name="alamat" class="form-control bg-white @error('alamat') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                       </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                       <label for="validationCustomUsername" class="form-label">NPWP</label>
+                       <div class="form-group">
+                          <input type="text" value="{{ json_decode($user->profil)->NPWP }}" name="NPWP" class="form-control bg-white @error('NPWP') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                       </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                       <label for="validationCustomUsername" class="form-label">No. Rekening</label>
+                       <div class="form-group">
+                          <input type="text" value="{{ json_decode($user->profil)->norek }}" name="norek" class="form-control bg-white @error('norek') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                       </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                       <label for="validationCustomUsername" class="form-label">No. Hp</label>
+                       <div class="form-group">
+                          <input type="text" value="{{ json_decode($user->profil)->no_hp }}" name="no_hp" class="form-control bg-white @error('no_hp') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                       </div>
+                    </div>
+                      <div class="col-md-6 mb-3">
+                         <label for="validationCustomUsername" class="form-label">Masa Berlaku s/d</label>
+                         <div class="form-group">
+                            <input type="date" value="{{ json_decode($user->profil)->active }}" name="active" class="form-control bg-white @error('active') is-invalid @enderror" id="validationCustomUsername" aria-label="Username" aria-describedby="basic-addon1" required>
+                         </div>
+                      </div>
                    </div>
                    <button type="submit" class="btn btn-primary my-3 w-100">Save</button>
                  </form>
