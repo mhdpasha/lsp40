@@ -1,12 +1,20 @@
-import './bootstrap';
-import { createInertiaApp } from '@inertiajs/inertia-react';
-import React from 'react';
-import { createRoot } from 'react-dom';
+import './bootstrap'
+
+import { createInertiaApp } from '@inertiajs/react'
+import { createRoot } from 'react-dom/client'
+import Template from './Template.jsx'
 
 createInertiaApp({
-    resolve: name => import(`./Pages/${name}`),
-    setup({ el, App, props}) {
-        const root = createRoot(el)
-        root.render(<App {...props}/>)
-    }
+  resolve: name => {
+    const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+    let page = pages[`./Pages/${name}.jsx`]
+    page.default.layout = page.default.layout || ((page) => <Template children={page}/>)
+    return page
+  },
+  setup({ el, App, props }) {
+    createRoot(el).render(<App {...props} />)
+  },
+  progress: {
+    color: '#fff'
+  }
 })

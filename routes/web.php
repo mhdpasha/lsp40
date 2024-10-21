@@ -20,16 +20,10 @@ use App\Http\Controllers\ScheduleController;
 |
 */
 
-Route::resource('/react', ReactController::class);
-
-Route::get('/', function () {
-
-//    $route = auth()->check()
-//             ? 'dashboard'
-//             : 'login';
-
-    return view('pages.landing.index');
-
+Route::prefix('')->group(function () {
+    Route::get('', [ReactController::class, 'home']);
+    Route::get('sertifikasi', [ReactController::class, 'sertifikasi']);
+    Route::get('informasi', [ReactController::class, 'informasi']);
 });
 
 Route::controller(AuthController::class)->group(function () {
