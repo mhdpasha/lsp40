@@ -9,16 +9,16 @@ class ReactController extends Controller
 {
     public function home()
     {
-        return Inertia::render('Home');
+        return inertia('Home');
     }
 
     public function sertifikasi()
     {
-        return Inertia::render('Sertifikasi');
+        return inertia('Sertifikasi');
     }
 
     public function informasi()
     {
-        return Inertia::render('Informasi');
+        return inertia('Informasi');
     }
 }

@@ -6,8 +6,8 @@ import Template from './Template.jsx'
 
 createInertiaApp({
   resolve: name => {
-    const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-    let page = pages[`./Pages/${name}.jsx`]
+    const pages = import.meta.glob('./App/**/*.jsx', { eager: true })
+    let page = pages[`./App/${name}.jsx`]
     page.default.layout = page.default.layout || ((page) => <Template children={page}/>)
     return page
   },

@@ -222,6 +222,7 @@
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/">Go to Homepage</a></li>
                 <li><a class="dropdown-item" href="../dashboard/app/user-profile.html">Profil</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
